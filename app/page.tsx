@@ -977,7 +977,7 @@ export default function LandingPage() {
           </div>
 
           <div className="border-t border-gray-200 dark:border-zinc-800 mt-12 pt-8 text-center">
-            <p className="text-gray-600 dark:text-gray-400 text-sm">© 2025 Agentic Financial Twin. All Rights Reserved.</p>
+            <p className="text-gray-600 dark:text-gray-400 text-sm">© 2025 FinTwin. All Rights Reserved.</p>
           </div>
         </div>
       </footer>
