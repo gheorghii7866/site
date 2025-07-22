@@ -81,34 +81,34 @@ const retirementTimelineData = [
 
 // NEW: Team Data for About Us Section
 const teamData = [
-    {
-        name: "Manuel Imanse",
-        title: "Co-Founder & CEO",
-        linkedin: "https://www.linkedin.com/in/manuel-imanse/",
-        image: "/assets/manuel.png",
-        bio: "Business strategist with a background in consulting."
-    },
-    {
-        name: "Nichita Railean",
-        title: "Co-Founder & CTO",
-        linkedin: "https://www.linkedin.com/in/nichita-railean-a78b4a206/",
-        image: "/assets/nick.png",
-        bio: "Full-stack engineer leading tech development."
-    },
-    {
-        name: "David Nabeiro",
-        title: "Founder & COO",
-        linkedin: "https://www.linkedin.com/in/david-nabeiro/",
-        image: "/assets/david.png",
-        bio: "AI and Process Improvement specialist."
-    },
-    {
-        name: "Martijn van Eck",
-        title: "Partner & Head of FinTech",
-        linkedin: "https://www.linkedin.com/in/martijnvaneck/",
-        image: "/assets/Martijn.jpeg",
-        bio: "Venture Building, Innovation, A.I., Financial Services, Digital Assets."
-    },
+  {
+    name: "Manuel Imanse",
+    title: "Co-Founder & CEO",
+    linkedin: "https://www.linkedin.com/in/manuel-imanse/",
+    image: "/assets/manuel.png",
+    bio: "Business strategist with a background in consulting."
+  },
+  {
+    name: "Nichita Railean",
+    title: "Co-Founder & CTO",
+    linkedin: "https://www.linkedin.com/in/nichita-railean-a78b4a206/",
+    image: "/assets/nick.png",
+    bio: "Full-stack engineer leading tech development."
+  },
+  {
+    name: "David Nabeiro",
+    title: "Founder & COO",
+    linkedin: "https://www.linkedin.com/in/david-nabeiro/",
+    image: "/assets/david.png",
+    bio: "AI and Process Improvement specialist."
+  },
+  {
+    name: "Martijn van Eck",
+    title: "Partner & Head of FinTech",
+    linkedin: "https://www.linkedin.com/in/martijnvaneck/",
+    image: "/assets/Martijn.jpeg",
+    bio: "Venture Building, Innovation, A.I., Financial Services, Digital Assets."
+  },
 ]
 
 const netWorthChartConfig = {
@@ -221,17 +221,18 @@ export default function LandingPage() {
     const sections = document.querySelectorAll("section[id]")
     const observer = new IntersectionObserver(
       (entries) => {
-        for (const entry of entries) {
+        entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            setActiveSection(entry.target.id)
-            break
+            setActiveSection(entry.target.id);
           }
-        }
+        });
       },
       {
-        rootMargin: "0px 0px -60% 0px",
+        // middle of viewport
+        rootMargin: "-50% 0px -50% 0px",
+        threshold: 0,
       }
-    )
+    );
 
     sections.forEach((section) => observer.observe(section))
 
@@ -288,70 +289,76 @@ export default function LandingPage() {
     <div className="min-h-screen bg-background text-foreground">
       {/* Rounded Glassmorphism Navigation */}
       <nav className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-[calc(100%-2rem)] md:w-auto">
+        {/* The main pill-shaped container */}
         <div
-          className={`transition-all duration-300 rounded-full px-4 md:px-6 py-2 ${
-            isScrolled
+          className={`transition-all duration-300 rounded-full px-4 py-2 ${isScrolled
               ? "bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md border border-gray-200 dark:border-zinc-800 shadow-lg"
               : "bg-white/60 dark:bg-zinc-900/60 backdrop-blur-sm border border-gray-100 dark:border-zinc-800/50"
-          }`}
+            }`}
         >
-          <div className="flex items-center justify-between md:justify-start md:space-x-8">
+          <div className="flex items-center justify-between space-x-4">
+            {/* Logo */}
             <a href="#hero" onClick={(e) => handleSmoothScroll(e, "hero")} className="flex-shrink-0">
-              <Image 
-                src="/assets/fintwin.png" 
-                alt="AFT Logo" 
-                width={52} 
-                height={52} 
+              <Image
+                src="/assets/fintwin.png"
+                alt="AFT Logo"
+                width={52}
+                height={52}
+                className="rounded-full" // Good practice to ensure image fits the circular space if needed
               />
             </a>
 
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-2">
+            {/* 
+        FIX 1: Added `flex-nowrap` to prevent links from wrapping onto a new line, 
+               which was causing the "Request Invite" button to be pushed out.
+      */}
+            <div className="hidden md:flex items-center space-x-1 flex-nowrap">
               <a
                 href="#analytics"
                 onClick={(e) => handleSmoothScroll(e, "analytics")}
-                className={`transition-all duration-200 text-sm px-3 py-1.5 rounded-full ${
-                  activeSection === "analytics"
+                className={`transition-all duration-200 text-sm px-4 py-1.5 rounded-full ${activeSection === "analytics"
                     ? "bg-gray-900 text-white dark:bg-gray-100 dark:text-gray-900 font-semibold"
                     : "text-gray-600 dark:text-gray-400 hover:bg-gray-200/50 dark:hover:bg-zinc-800/50"
-                }`}
+                  }`}
               >
                 Analytics
               </a>
               <a
                 href="#features"
                 onClick={(e) => handleSmoothScroll(e, "features")}
-                className={`transition-all duration-200 text-sm px-3 py-1.5 rounded-full ${
-                  activeSection === "features"
+                className={`transition-all duration-200 text-sm px-4 py-1.5 rounded-full ${activeSection === "features"
                     ? "bg-gray-900 text-white dark:bg-gray-100 dark:text-gray-900 font-semibold"
                     : "text-gray-600 dark:text-gray-400 hover:bg-gray-200/50 dark:hover:bg-zinc-800/50"
-                }`}
+                  }`}
               >
                 Features
               </a>
               <a
                 href="#security"
                 onClick={(e) => handleSmoothScroll(e, "security")}
-                className={`transition-all duration-200 text-sm px-3 py-1.5 rounded-full ${
-                  activeSection === "security"
+                className={`transition-all duration-200 text-sm px-4 py-1.5 rounded-full ${activeSection === "security"
                     ? "bg-gray-900 text-white dark:bg-gray-100 dark:text-gray-900 font-semibold"
                     : "text-gray-600 dark:text-gray-400 hover:bg-gray-200/50 dark:hover:bg-zinc-800/50"
-                }`}
+                  }`}
               >
                 Security
               </a>
               <a
                 href="#about-us"
                 onClick={(e) => handleSmoothScroll(e, "about-us")}
-                className={`transition-all duration-200 text-sm px-3 py-1.5 rounded-full ${
-                  activeSection === "about-us"
+                /*
+                  FIX 2: Added `whitespace-nowrap` to prevent "About Us" from breaking into two lines,
+                         which made the highlight look "weird".
+                */
+                className={`transition-all duration-200 text-sm px-4 py-1.5 rounded-full whitespace-nowrap ${activeSection === "about-us"
                     ? "bg-gray-900 text-white dark:bg-gray-100 dark:text-gray-900 font-semibold"
                     : "text-gray-600 dark:text-gray-400 hover:bg-gray-200/50 dark:hover:bg-zinc-800/50"
-                }`}
+                  }`}
               >
                 About Us
               </a>
-              <Button size="sm" className="bg-gray-900 hover:bg-gray-800 text-white dark:bg-gray-100 dark:hover:bg-gray-200 dark:text-gray-900 border-0 rounded-full px-4 ml-2">
+              <Button size="sm" className="bg-gray-900 hover:bg-gray-800 text-white dark:bg-gray-100 dark:hover:bg-gray-200 dark:text-gray-900 border-0 rounded-full px-4 ml-2 flex-shrink-0">
                 Request Invite
               </Button>
             </div>
@@ -362,7 +369,7 @@ export default function LandingPage() {
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100"
               >
-                {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+                {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
               </button>
             </div>
           </div>
@@ -371,22 +378,25 @@ export default function LandingPage() {
         {/* Mobile Navigation */}
         {isMobileMenuOpen && (
           <div className="md:hidden mt-2 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-md border border-gray-200 dark:border-zinc-800 rounded-2xl shadow-lg p-4">
-            <div className="space-y-3">
-              <a href="#analytics" onClick={(e) => handleSmoothScroll(e, "analytics")} className="block text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 text-sm">
+            <div className="flex flex-col space-y-2">
+              {/* Added active state highlighting for mobile for consistency */}
+              <a href="#analytics" onClick={(e) => handleSmoothScroll(e, "analytics")} className={`block p-2 rounded-md font-medium ${activeSection === 'analytics' ? 'bg-gray-100 dark:bg-zinc-800 text-gray-900 dark:text-white' : 'text-gray-600 dark:text-gray-400'}`}>
                 Analytics
               </a>
-              <a href="#features" onClick={(e) => handleSmoothScroll(e, "features")} className="block text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 text-sm">
+              <a href="#features" onClick={(e) => handleSmoothScroll(e, "features")} className={`block p-2 rounded-md font-medium ${activeSection === 'features' ? 'bg-gray-100 dark:bg-zinc-800 text-gray-900 dark:text-white' : 'text-gray-600 dark:text-gray-400'}`}>
                 Features
               </a>
-              <a href="#security" onClick={(e) => handleSmoothScroll(e, "security")} className="block text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 text-sm">
+              <a href="#security" onClick={(e) => handleSmoothScroll(e, "security")} className={`block p-2 rounded-md font-medium ${activeSection === 'security' ? 'bg-gray-100 dark:bg-zinc-800 text-gray-900 dark:text-white' : 'text-gray-600 dark:text-gray-400'}`}>
                 Security
               </a>
-              <a href="#about-us" onClick={(e) => handleSmoothScroll(e, "about-us")} className="block text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 text-sm">
+              <a href="#about-us" onClick={(e) => handleSmoothScroll(e, "about-us")} className={`block p-2 rounded-md font-medium ${activeSection === 'about-us' ? 'bg-gray-100 dark:bg-zinc-800 text-gray-900 dark:text-white' : 'text-gray-600 dark:text-gray-400'}`}>
                 About Us
               </a>
-              <Button size="sm" className="w-full bg-gray-900 hover:bg-gray-800 text-white dark:bg-gray-100 dark:hover:bg-gray-200 dark:text-gray-900 border-0 rounded-full">
-                Request Invite
-              </Button>
+              <div className="pt-2">
+                <Button size="sm" className="w-full bg-gray-900 hover:bg-gray-800 text-white dark:bg-gray-100 dark:hover:bg-gray-200 dark:text-gray-900 border-0 rounded-full">
+                  Request Invite
+                </Button>
+              </div>
             </div>
           </div>
         )}
@@ -525,7 +535,7 @@ export default function LandingPage() {
                       tickMargin={10}
                       axisLine={false}
                     />
-                     <YAxis
+                    <YAxis
                       tickLine={false}
                       axisLine={false}
                       tickMargin={8}
@@ -554,7 +564,7 @@ export default function LandingPage() {
                 <CardDescription>Investment distribution</CardDescription>
               </CardHeader>
               <CardContent className="flex-1 pt-0 pb-6 flex flex-col">
-                 <ChartContainer
+                <ChartContainer
                   config={pieChartConfig}
                   className="mx-auto aspect-square h-full max-h-[250px]"
                 >
@@ -564,9 +574,9 @@ export default function LandingPage() {
                       content={<ChartTooltipContent hideLabel />}
                     />
                     <Pie data={portfolioData} dataKey="value" nameKey="name" innerRadius={60}>
-                       {portfolioData.map((entry, index) => (
-                          <Cell key={`cell-${index}`} fill={entry.color} />
-                        ))}
+                      {portfolioData.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={entry.color} />
+                      ))}
                     </Pie>
                   </PieChart>
                 </ChartContainer>
@@ -620,8 +630,8 @@ export default function LandingPage() {
                       formatter={(value) => `$${((value as number) / 1000000).toFixed(2)}M`}
                     />
                     <Line type="monotone" dataKey="conservative" stroke="var(--color-conservative)" strokeWidth={2} dot={false} />
-                    <Line type="monotone" dataKey="moderate" stroke="var(--color-moderate)" strokeWidth={2} dot={false}/>
-                    <Line type="monotone" dataKey="aggressive" stroke="var(--color-aggressive)" strokeWidth={2} dot={false}/>
+                    <Line type="monotone" dataKey="moderate" stroke="var(--color-moderate)" strokeWidth={2} dot={false} />
+                    <Line type="monotone" dataKey="aggressive" stroke="var(--color-aggressive)" strokeWidth={2} dot={false} />
                   </LineChart>
                 </ChartContainer>
               </CardContent>
@@ -641,9 +651,8 @@ export default function LandingPage() {
                   {chatMessages.map((msg, index) => (
                     <div key={index} className={`flex ${msg.type === "user" ? "justify-end" : "justify-start"}`}>
                       <div
-                        className={`max-w-[80%] p-2 rounded-lg text-sm ${
-                          msg.type === "user" ? "bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900" : "bg-gray-100 dark:bg-zinc-800 text-gray-900 dark:text-gray-100"
-                        }`}
+                        className={`max-w-[80%] p-2 rounded-lg text-sm ${msg.type === "user" ? "bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900" : "bg-gray-100 dark:bg-zinc-800 text-gray-900 dark:text-gray-100"
+                          }`}
                       >
                         {msg.message}
                       </div>
@@ -870,11 +879,10 @@ export default function LandingPage() {
                     className="rounded-full mx-auto mb-4 border-2 border-gray-200 dark:border-zinc-700 object-cover"
                   />
                   <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">{member.name}</h3>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">{member.title}</p>
                   <p className="text-gray-600 dark:text-gray-300 text-sm mb-4 min-h-[40px]">{member.bio}</p>
-                   <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="inline-block text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
-                      <Linkedin size={20} />
-                    </a>
+                  <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="inline-block text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
+                    <Linkedin size={20} />
+                  </a>
                 </CardContent>
               </Card>
             ))}
@@ -896,8 +904,8 @@ export default function LandingPage() {
           </p>
 
           <div className="max-w-lg mx-auto h-12 mb-4">
-             {isEmailSubmitted ? (
-               <div className="flex items-center justify-center h-full bg-white/10 text-white rounded-full text-center px-4 animate-pulse">
+            {isEmailSubmitted ? (
+              <div className="flex items-center justify-center h-full bg-white/10 text-white rounded-full text-center px-4 animate-pulse">
                 <CheckCircle className="h-5 w-5 mr-2" />
                 You're on the list! We'll be in touch.
               </div>
@@ -928,13 +936,13 @@ export default function LandingPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-3 gap-8">
             <div className="flex flex-col items-start">
-              <Image 
-                  src="/assets/fintwin.png" 
-                  alt="AFT Logo" 
-                  width={52} 
-                  height={52} 
-                  className="mb-4"
-                />
+              <Image
+                src="/assets/fintwin.png"
+                alt="AFT Logo"
+                width={52}
+                height={52}
+                className="mb-4"
+              />
               <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
                 Empowering financial independence through technology.
               </p>
@@ -977,27 +985,27 @@ export default function LandingPage() {
       {/* Legal Modals */}
       {showPrivacyModal && (
         <LegalModal title="Privacy Policy" onClose={() => setShowPrivacyModal(false)}>
-            <p><strong>Last Updated: [Date]</strong></p>
-            <p>Your privacy is important to us. It is Agentic Financial Twin's policy to respect your privacy regarding any information we may collect from you across our website, and other sites we own and operate.</p>
-            <h3 className="font-bold text-gray-800 dark:text-gray-200 mt-4">1. Information We Collect</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat.</p>
-            <h3 className="font-bold text-gray-800 dark:text-gray-200 mt-4">2. How We Use Information</h3>
-            <p>Duis semper. Duis arcu massa, scelerisque vitae, consequat in, pretium a, enim. Pellentesque congue. Ut in risus volutpat libero pharetra tempor. Cras vestibulum bibendum augue. Praesent egestas leo in pede. Praesent blandit odio eu enim. Pellentesque sed dui ut augue blandit sodales.</p>
-             <h3 className="font-bold text-gray-800 dark:text-gray-200 mt-4">3. Security of Your Information</h3>
-            <p>We value your trust in providing us your Personal Information, thus we are striving to use commercially acceptable means of protecting it. But remember that no method of transmission over the internet, or method of electronic storage is 100% secure and reliable, and we cannot guarantee its absolute security.</p>
+          <p><strong>Last Updated: 22.07.2025</strong></p>
+          <p>Your privacy is important to us. It is Agentic Financial Twin's policy to respect your privacy regarding any information we may collect from you across our website, and other sites we own and operate.</p>
+          <h3 className="font-bold text-gray-800 dark:text-gray-200 mt-4">1. Information We Collect</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat.</p>
+          <h3 className="font-bold text-gray-800 dark:text-gray-200 mt-4">2. How We Use Information</h3>
+          <p>Duis semper. Duis arcu massa, scelerisque vitae, consequat in, pretium a, enim. Pellentesque congue. Ut in risus volutpat libero pharetra tempor. Cras vestibulum bibendum augue. Praesent egestas leo in pede. Praesent blandit odio eu enim. Pellentesque sed dui ut augue blandit sodales.</p>
+          <h3 className="font-bold text-gray-800 dark:text-gray-200 mt-4">3. Security of Your Information</h3>
+          <p>We value your trust in providing us your Personal Information, thus we are striving to use commercially acceptable means of protecting it. But remember that no method of transmission over the internet, or method of electronic storage is 100% secure and reliable, and we cannot guarantee its absolute security.</p>
         </LegalModal>
       )}
 
-       {showTermsModal && (
+      {showTermsModal && (
         <LegalModal title="Terms of Service" onClose={() => setShowTermsModal(false)}>
-            <p><strong>Last Updated: [Date]</strong></p>
-            <p>By accessing this website, we assume you accept these terms and conditions. Do not continue to use Agentic Financial Twin if you do not agree to take all of the terms and conditions stated on this page.</p>
-            <h3 className="font-bold text-gray-800 dark:text-gray-200 mt-4">1. Use of the Site</h3>
-            <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In ac dui quis mi consectetuer lacinia. Nam pretium turpis et arcu. Duis arcu tortor, suscipit eget, imperdiet nec, imperdiet iaculis, ipsum. Sed aliquam ultrices mauris.</p>
-            <h3 className="font-bold text-gray-800 dark:text-gray-200 mt-4">2. Disclaimer</h3>
-            <p>The materials on Agentic Financial Twin's website are provided on an 'as is' basis. Agentic Financial Twin makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.</p>
-             <h3 className="font-bold text-gray-800 dark:text-gray-200 mt-4">3. Limitations</h3>
-            <p>In no event shall Agentic Financial Twin or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on Agentic Financial Twin's website, even if Agentic Financial Twin or a Agentic Financial Twin authorized representative has been notified orally or in writing of the possibility of such damage.</p>
+          <p><strong>Last Updated: 22.07.2025</strong></p>
+          <p>By accessing this website, we assume you accept these terms and conditions. Do not continue to use Agentic Financial Twin if you do not agree to take all of the terms and conditions stated on this page.</p>
+          <h3 className="font-bold text-gray-800 dark:text-gray-200 mt-4">1. Use of the Site</h3>
+          <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In ac dui quis mi consectetuer lacinia. Nam pretium turpis et arcu. Duis arcu tortor, suscipit eget, imperdiet nec, imperdiet iaculis, ipsum. Sed aliquam ultrices mauris.</p>
+          <h3 className="font-bold text-gray-800 dark:text-gray-200 mt-4">2. Disclaimer</h3>
+          <p>The materials on Agentic Financial Twin's website are provided on an 'as is' basis. Agentic Financial Twin makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.</p>
+          <h3 className="font-bold text-gray-800 dark:text-gray-200 mt-4">3. Limitations</h3>
+          <p>In no event shall Agentic Financial Twin or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on Agentic Financial Twin's website, even if Agentic Financial Twin or a Agentic Financial Twin authorized representative has been notified orally or in writing of the possibility of such damage.</p>
         </LegalModal>
       )}
 
