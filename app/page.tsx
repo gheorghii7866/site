@@ -296,8 +296,8 @@ export default function LandingPage() {
         {/* The main pill-shaped container */}
         <div
           className={`transition-all duration-300 rounded-full px-4 py-2 ${isScrolled
-              ? "bg-background/80 backdrop-blur-md border shadow-lg"
-              : "bg-background/60 backdrop-blur-sm border border-border/50"
+            ? "bg-background/80 backdrop-blur-md border shadow-lg"
+            : "bg-background/60 backdrop-blur-sm border border-border/50"
             }`}
         >
           <div className="flex items-center justify-between space-x-4">
@@ -318,8 +318,8 @@ export default function LandingPage() {
                 href="#analytics"
                 onClick={(e) => handleSmoothScroll(e, "analytics")}
                 className={`transition-colors duration-200 text-sm px-4 py-1.5 rounded-full ${activeSection === "analytics"
-                    ? "bg-primary text-primary-foreground font-semibold"
-                    : "text-muted-foreground hover:bg-accent hover:text-accent-foreground"
+                  ? "bg-primary text-primary-foreground font-semibold"
+                  : "text-muted-foreground hover:bg-accent hover:text-accent-foreground"
                   }`}
               >
                 Analytics
@@ -328,8 +328,8 @@ export default function LandingPage() {
                 href="#features"
                 onClick={(e) => handleSmoothScroll(e, "features")}
                 className={`transition-colors duration-200 text-sm px-4 py-1.5 rounded-full ${activeSection === "features"
-                    ? "bg-primary text-primary-foreground font-semibold"
-                    : "text-muted-foreground hover:bg-accent hover:text-accent-foreground"
+                  ? "bg-primary text-primary-foreground font-semibold"
+                  : "text-muted-foreground hover:bg-accent hover:text-accent-foreground"
                   }`}
               >
                 Features
@@ -338,8 +338,8 @@ export default function LandingPage() {
                 href="#security"
                 onClick={(e) => handleSmoothScroll(e, "security")}
                 className={`transition-colors duration-200 text-sm px-4 py-1.5 rounded-full ${activeSection === "security"
-                    ? "bg-primary text-primary-foreground font-semibold"
-                    : "text-muted-foreground hover:bg-accent hover:text-accent-foreground"
+                  ? "bg-primary text-primary-foreground font-semibold"
+                  : "text-muted-foreground hover:bg-accent hover:text-accent-foreground"
                   }`}
               >
                 Security
@@ -348,8 +348,8 @@ export default function LandingPage() {
                 href="#about-us"
                 onClick={(e) => handleSmoothScroll(e, "about-us")}
                 className={`transition-colors duration-200 text-sm px-4 py-1.5 rounded-full whitespace-nowrap ${activeSection === "about-us"
-                    ? "bg-primary text-primary-foreground font-semibold"
-                    : "text-muted-foreground hover:bg-accent hover:text-accent-foreground"
+                  ? "bg-primary text-primary-foreground font-semibold"
+                  : "text-muted-foreground hover:bg-accent hover:text-accent-foreground"
                   }`}
               >
                 About Us
@@ -802,8 +802,14 @@ export default function LandingPage() {
               </div>
             </div>
             <div className="relative flex items-center justify-center">
-              <div className="w-64 h-64 mx-auto bg-gradient-to-br from-gray-700 to-gray-800 rounded-full flex items-center justify-center">
-                <Shield className="text-white" size={80} />
+              {/* This div now acts as a circular "clipping mask" */}
+              <div className="relative w-80 h-80 mx-auto rounded-full overflow-hidden">
+                <Image
+                  src="/assets/web.png" // <-- CHANGE THIS to the path of your image
+                  alt="A descriptive alt text for your image" // <-- CHANGE THIS for accessibility
+                  fill // The 'fill' prop makes the image fill its parent container
+                  className="object-cover" // Ensures the image covers the area without stretching
+                />
               </div>
             </div>
           </div>
