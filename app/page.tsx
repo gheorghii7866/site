@@ -288,12 +288,16 @@ export default function LandingPage() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Rounded Glassmorphism Navigation */}
-      <nav className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-[calc(100%-2rem)] md:w-auto">
+      // FINAL CORRECTED CODE
+      // This version uses the semantic theme classes (like bg-background, text-primary)
+      // that directly correspond to the variables in your globals.css file.
+
+      <nav id="main-nav" className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-[calc(100%-2rem)] md:w-auto">
         {/* The main pill-shaped container */}
         <div
           className={`transition-all duration-300 rounded-full px-4 py-2 ${isScrolled
-              ? "bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md border border-gray-200 dark:border-zinc-800 shadow-lg"
-              : "bg-white/60 dark:bg-zinc-900/60 backdrop-blur-sm border border-gray-100 dark:border-zinc-800/50"
+              ? "bg-background/80 backdrop-blur-md border shadow-lg"
+              : "bg-background/60 backdrop-blur-sm border border-border/50"
             }`}
         >
           <div className="flex items-center justify-between space-x-4">
@@ -304,22 +308,18 @@ export default function LandingPage() {
                 alt="AFT Logo"
                 width={52}
                 height={52}
-                className="rounded-full" // Good practice to ensure image fits the circular space if needed
+                className="rounded-full"
               />
             </a>
 
             {/* Desktop Navigation */}
-            {/* 
-        FIX 1: Added `flex-nowrap` to prevent links from wrapping onto a new line, 
-               which was causing the "Request Invite" button to be pushed out.
-      */}
             <div className="hidden md:flex items-center space-x-1 flex-nowrap">
               <a
                 href="#analytics"
                 onClick={(e) => handleSmoothScroll(e, "analytics")}
-                className={`transition-all duration-200 text-sm px-4 py-1.5 rounded-full ${activeSection === "analytics"
-                    ? "bg-gray-900 text-white dark:bg-gray-100 dark:text-gray-900 font-semibold"
-                    : "text-gray-600 dark:text-gray-400 hover:bg-gray-200/50 dark:hover:bg-zinc-800/50"
+                className={`transition-colors duration-200 text-sm px-4 py-1.5 rounded-full ${activeSection === "analytics"
+                    ? "bg-primary text-primary-foreground font-semibold"
+                    : "text-muted-foreground hover:bg-accent hover:text-accent-foreground"
                   }`}
               >
                 Analytics
@@ -327,9 +327,9 @@ export default function LandingPage() {
               <a
                 href="#features"
                 onClick={(e) => handleSmoothScroll(e, "features")}
-                className={`transition-all duration-200 text-sm px-4 py-1.5 rounded-full ${activeSection === "features"
-                    ? "bg-gray-900 text-white dark:bg-gray-100 dark:text-gray-900 font-semibold"
-                    : "text-gray-600 dark:text-gray-400 hover:bg-gray-200/50 dark:hover:bg-zinc-800/50"
+                className={`transition-colors duration-200 text-sm px-4 py-1.5 rounded-full ${activeSection === "features"
+                    ? "bg-primary text-primary-foreground font-semibold"
+                    : "text-muted-foreground hover:bg-accent hover:text-accent-foreground"
                   }`}
               >
                 Features
@@ -337,9 +337,9 @@ export default function LandingPage() {
               <a
                 href="#security"
                 onClick={(e) => handleSmoothScroll(e, "security")}
-                className={`transition-all duration-200 text-sm px-4 py-1.5 rounded-full ${activeSection === "security"
-                    ? "bg-gray-900 text-white dark:bg-gray-100 dark:text-gray-900 font-semibold"
-                    : "text-gray-600 dark:text-gray-400 hover:bg-gray-200/50 dark:hover:bg-zinc-800/50"
+                className={`transition-colors duration-200 text-sm px-4 py-1.5 rounded-full ${activeSection === "security"
+                    ? "bg-primary text-primary-foreground font-semibold"
+                    : "text-muted-foreground hover:bg-accent hover:text-accent-foreground"
                   }`}
               >
                 Security
@@ -347,18 +347,14 @@ export default function LandingPage() {
               <a
                 href="#about-us"
                 onClick={(e) => handleSmoothScroll(e, "about-us")}
-                /*
-                  FIX 2: Added `whitespace-nowrap` to prevent "About Us" from breaking into two lines,
-                         which made the highlight look "weird".
-                */
-                className={`transition-all duration-200 text-sm px-4 py-1.5 rounded-full whitespace-nowrap ${activeSection === "about-us"
-                    ? "bg-gray-900 text-white dark:bg-gray-100 dark:text-gray-900 font-semibold"
-                    : "text-gray-600 dark:text-gray-400 hover:bg-gray-200/50 dark:hover:bg-zinc-800/50"
+                className={`transition-colors duration-200 text-sm px-4 py-1.5 rounded-full whitespace-nowrap ${activeSection === "about-us"
+                    ? "bg-primary text-primary-foreground font-semibold"
+                    : "text-muted-foreground hover:bg-accent hover:text-accent-foreground"
                   }`}
               >
                 About Us
               </a>
-              <Button size="sm" className="bg-gray-900 hover:bg-gray-800 text-white dark:bg-gray-100 dark:hover:bg-gray-200 dark:text-gray-900 border-0 rounded-full px-4 ml-2 flex-shrink-0">
+              <Button size="sm" className="rounded-full px-4 ml-2 flex-shrink-0">
                 Request Invite
               </Button>
             </div>
@@ -367,7 +363,7 @@ export default function LandingPage() {
             <div className="md:hidden">
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100"
+                className="text-muted-foreground hover:text-foreground"
               >
                 {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
               </button>
@@ -377,23 +373,22 @@ export default function LandingPage() {
 
         {/* Mobile Navigation */}
         {isMobileMenuOpen && (
-          <div className="md:hidden mt-2 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-md border border-gray-200 dark:border-zinc-800 rounded-2xl shadow-lg p-4">
-            <div className="flex flex-col space-y-2">
-              {/* Added active state highlighting for mobile for consistency */}
-              <a href="#analytics" onClick={(e) => handleSmoothScroll(e, "analytics")} className={`block p-2 rounded-md font-medium ${activeSection === 'analytics' ? 'bg-gray-100 dark:bg-zinc-800 text-gray-900 dark:text-white' : 'text-gray-600 dark:text-gray-400'}`}>
+          <div className="md:hidden mt-2 bg-card/90 backdrop-blur-md border rounded-2xl shadow-lg p-4">
+            <div className="flex flex-col space-y-1">
+              <a href="#analytics" onClick={(e) => handleSmoothScroll(e, "analytics")} className={`block p-2 rounded-md font-medium text-sm ${activeSection === 'analytics' ? 'bg-accent text-accent-foreground' : 'text-muted-foreground'}`}>
                 Analytics
               </a>
-              <a href="#features" onClick={(e) => handleSmoothScroll(e, "features")} className={`block p-2 rounded-md font-medium ${activeSection === 'features' ? 'bg-gray-100 dark:bg-zinc-800 text-gray-900 dark:text-white' : 'text-gray-600 dark:text-gray-400'}`}>
+              <a href="#features" onClick={(e) => handleSmoothScroll(e, "features")} className={`block p-2 rounded-md font-medium text-sm ${activeSection === 'features' ? 'bg-accent text-accent-foreground' : 'text-muted-foreground'}`}>
                 Features
               </a>
-              <a href="#security" onClick={(e) => handleSmoothScroll(e, "security")} className={`block p-2 rounded-md font-medium ${activeSection === 'security' ? 'bg-gray-100 dark:bg-zinc-800 text-gray-900 dark:text-white' : 'text-gray-600 dark:text-gray-400'}`}>
+              <a href="#security" onClick={(e) => handleSmoothScroll(e, "security")} className={`block p-2 rounded-md font-medium text-sm ${activeSection === 'security' ? 'bg-accent text-accent-foreground' : 'text-muted-foreground'}`}>
                 Security
               </a>
-              <a href="#about-us" onClick={(e) => handleSmoothScroll(e, "about-us")} className={`block p-2 rounded-md font-medium ${activeSection === 'about-us' ? 'bg-gray-100 dark:bg-zinc-800 text-gray-900 dark:text-white' : 'text-gray-600 dark:text-gray-400'}`}>
+              <a href="#about-us" onClick={(e) => handleSmoothScroll(e, "about-us")} className={`block p-2 rounded-md font-medium text-sm ${activeSection === 'about-us' ? 'bg-accent text-accent-foreground' : 'text-muted-foreground'}`}>
                 About Us
               </a>
               <div className="pt-2">
-                <Button size="sm" className="w-full bg-gray-900 hover:bg-gray-800 text-white dark:bg-gray-100 dark:hover:bg-gray-200 dark:text-gray-900 border-0 rounded-full">
+                <Button size="sm" className="w-full rounded-full">
                   Request Invite
                 </Button>
               </div>
@@ -925,9 +920,6 @@ export default function LandingPage() {
               </form>
             )}
           </div>
-          <p className="text-sm text-gray-400">
-            Limited spots available for our initial beta. Join the waitlist to secure your place.
-          </p>
         </div>
       </section>
 
