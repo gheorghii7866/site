@@ -975,10 +975,6 @@ export default function LandingPage() {
         <LegalModal title="Privacy Policy" onClose={() => setShowPrivacyModal(false)}>
           <p><strong>Last Updated: 22.07.2025</strong></p>
           <p>Your privacy is important to us. It is Agentic Financial Twin's policy to respect your privacy regarding any information we may collect from you across our website, and other sites we own and operate.</p>
-          <h3 className="font-bold text-gray-800 dark:text-gray-200 mt-4">1. Information We Collect</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat.</p>
-          <h3 className="font-bold text-gray-800 dark:text-gray-200 mt-4">2. How We Use Information</h3>
-          <p>Duis semper. Duis arcu massa, scelerisque vitae, consequat in, pretium a, enim. Pellentesque congue. Ut in risus volutpat libero pharetra tempor. Cras vestibulum bibendum augue. Praesent egestas leo in pede. Praesent blandit odio eu enim. Pellentesque sed dui ut augue blandit sodales.</p>
           <h3 className="font-bold text-gray-800 dark:text-gray-200 mt-4">3. Security of Your Information</h3>
           <p>We value your trust in providing us your Personal Information, thus we are striving to use commercially acceptable means of protecting it. But remember that no method of transmission over the internet, or method of electronic storage is 100% secure and reliable, and we cannot guarantee its absolute security.</p>
         </LegalModal>
@@ -988,8 +984,6 @@ export default function LandingPage() {
         <LegalModal title="Terms of Service" onClose={() => setShowTermsModal(false)}>
           <p><strong>Last Updated: 22.07.2025</strong></p>
           <p>By accessing this website, we assume you accept these terms and conditions. Do not continue to use Agentic Financial Twin if you do not agree to take all of the terms and conditions stated on this page.</p>
-          <h3 className="font-bold text-gray-800 dark:text-gray-200 mt-4">1. Use of the Site</h3>
-          <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In ac dui quis mi consectetuer lacinia. Nam pretium turpis et arcu. Duis arcu tortor, suscipit eget, imperdiet nec, imperdiet iaculis, ipsum. Sed aliquam ultrices mauris.</p>
           <h3 className="font-bold text-gray-800 dark:text-gray-200 mt-4">2. Disclaimer</h3>
           <p>The materials on Agentic Financial Twin's website are provided on an 'as is' basis. Agentic Financial Twin makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.</p>
           <h3 className="font-bold text-gray-800 dark:text-gray-200 mt-4">3. Limitations</h3>
