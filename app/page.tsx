@@ -43,6 +43,7 @@ import {
   Pie,
   Cell,
 } from "recharts"
+import { ThemeToggle } from "@/components/theme-toggle"
 
 // Mock data for charts
 const netWorthData = [
@@ -206,6 +207,7 @@ export default function LandingPage() {
     },
   ])
   const [activeSection, setActiveSection] = useState("hero")
+  const [hasSentMessage, setHasSentMessage] = useState(false)
 
   // NEW state for legal modals
   const [showPrivacyModal, setShowPrivacyModal] = useState(false);
@@ -268,9 +270,10 @@ export default function LandingPage() {
 
   const handleChatSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    if (chatMessage.trim()) {
+    if (chatMessage.trim() && !hasSentMessage) {
       setChatMessages([...chatMessages, { type: "user", message: chatMessage }])
       setChatMessage("")
+      setHasSentMessage(true)
       // Simulate AI response
       setTimeout(() => {
         setChatMessages((prev) => [
@@ -288,17 +291,10 @@ export default function LandingPage() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Rounded Glassmorphism Navigation */}
-      // FINAL CORRECTED CODE
-      // This version uses the semantic theme classes (like bg-background, text-primary)
-      // that directly correspond to the variables in your globals.css file.
-
       <nav id="main-nav" className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-[calc(100%-2rem)] md:w-auto">
         {/* The main pill-shaped container */}
         <div
-          className={`transition-all duration-300 rounded-full px-4 py-2 ${isScrolled
-            ? "bg-background/80 backdrop-blur-md border shadow-lg"
-            : "bg-background/60 backdrop-blur-sm border border-border/50"
-            }`}
+          className={`transition-all duration-300 rounded-full px-4 py-2 bg-white dark:bg-white border shadow-lg`}
         >
           <div className="flex items-center justify-between space-x-4">
             {/* Logo */}
@@ -354,9 +350,10 @@ export default function LandingPage() {
               >
                 About Us
               </a>
-              <Button size="sm" className="rounded-full px-4 ml-2 flex-shrink-0">
-                Request Invite
-              </Button>
+              {/* Theme Toggle */}
+              <div className="ml-4 flex items-center">
+                <ThemeToggle />
+              </div>
             </div>
 
             {/* Mobile menu button */}
@@ -375,23 +372,10 @@ export default function LandingPage() {
         {isMobileMenuOpen && (
           <div className="md:hidden mt-2 bg-card/90 backdrop-blur-md border rounded-2xl shadow-lg p-4">
             <div className="flex flex-col space-y-1">
-              <a href="#analytics" onClick={(e) => handleSmoothScroll(e, "analytics")} className={`block p-2 rounded-md font-medium text-sm ${activeSection === 'analytics' ? 'bg-accent text-accent-foreground' : 'text-muted-foreground'}`}>
-                Analytics
-              </a>
-              <a href="#features" onClick={(e) => handleSmoothScroll(e, "features")} className={`block p-2 rounded-md font-medium text-sm ${activeSection === 'features' ? 'bg-accent text-accent-foreground' : 'text-muted-foreground'}`}>
-                Features
-              </a>
-              <a href="#security" onClick={(e) => handleSmoothScroll(e, "security")} className={`block p-2 rounded-md font-medium text-sm ${activeSection === 'security' ? 'bg-accent text-accent-foreground' : 'text-muted-foreground'}`}>
-                Security
-              </a>
-              <a href="#about-us" onClick={(e) => handleSmoothScroll(e, "about-us")} className={`block p-2 rounded-md font-medium text-sm ${activeSection === 'about-us' ? 'bg-accent text-accent-foreground' : 'text-muted-foreground'}`}>
-                About Us
-              </a>
-              <div className="pt-2">
-                <Button size="sm" className="w-full rounded-full">
-                  Request Invite
-                </Button>
-              </div>
+              <a href="#analytics" onClick={(e) => handleSmoothScroll(e, "analytics")} className={`block p-2 rounded-md font-medium text-sm ${activeSection === 'analytics' ? 'bg-accent text-accent-foreground' : 'text-muted-foreground'}`}>Analytics</a>
+              <a href="#features" onClick={(e) => handleSmoothScroll(e, "features")} className={`block p-2 rounded-md font-medium text-sm ${activeSection === 'features' ? 'bg-accent text-accent-foreground' : 'text-muted-foreground'}`}>Features</a>
+              <a href="#security" onClick={(e) => handleSmoothScroll(e, "security")} className={`block p-2 rounded-md font-medium text-sm ${activeSection === 'security' ? 'bg-accent text-accent-foreground' : 'text-muted-foreground'}`}>Security</a>
+              <a href="#about-us" onClick={(e) => handleSmoothScroll(e, "about-us")} className={`block p-2 rounded-md font-medium text-sm ${activeSection === 'about-us' ? 'bg-accent text-accent-foreground' : 'text-muted-foreground'}`}>About Us</a>
             </div>
           </div>
         )}
@@ -657,13 +641,15 @@ export default function LandingPage() {
                 <div className="px-4 pt-4 pb-8 border-t border-gray-200 dark:border-zinc-800">
                   <form onSubmit={handleChatSubmit} className="flex gap-2">
                     <Input
+                      type="text"
+                      placeholder="Type your message..."
                       value={chatMessage}
                       onChange={(e) => setChatMessage(e.target.value)}
-                      placeholder="Ask about your finances..."
-                      className="flex-1 text-sm bg-white dark:bg-zinc-800"
+                      disabled={hasSentMessage}
+                      className="flex-1"
                     />
-                    <Button type="submit" size="icon" className="bg-gray-900 hover:bg-gray-800 dark:bg-gray-100 dark:hover:bg-gray-200 dark:text-gray-900">
-                      <Send className="h-4 w-4" />
+                    <Button type="submit" disabled={hasSentMessage || !chatMessage.trim()}>
+                      Send
                     </Button>
                   </form>
                 </div>
