@@ -376,6 +376,10 @@ export default function LandingPage() {
               <a href="#features" onClick={(e) => handleSmoothScroll(e, "features")} className={`block p-2 rounded-md font-medium text-sm ${activeSection === 'features' ? 'bg-accent text-accent-foreground' : 'text-muted-foreground'}`}>Features</a>
               <a href="#security" onClick={(e) => handleSmoothScroll(e, "security")} className={`block p-2 rounded-md font-medium text-sm ${activeSection === 'security' ? 'bg-accent text-accent-foreground' : 'text-muted-foreground'}`}>Security</a>
               <a href="#about-us" onClick={(e) => handleSmoothScroll(e, "about-us")} className={`block p-2 rounded-md font-medium text-sm ${activeSection === 'about-us' ? 'bg-accent text-accent-foreground' : 'text-muted-foreground'}`}>About Us</a>
+              {/* Theme Toggle for mobile */}
+              <div className="pt-3 flex justify-center">
+                <ThemeToggle />
+              </div>
             </div>
           </div>
         )}
